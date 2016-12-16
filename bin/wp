@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Gets the corresponding Bash Ubuntu path of a windows file/folder.
+
+This script has been written for "Bash on Ubuntu on Windows".
+
+Example:
+    $ wp C:\\Users\john\Albums
+    /mnt/c/Users/john/albums
+    
+    $ ls $(\"wp \"C:\\Users\john\Albums\"\")
+    Please Please Me    A Hard Day's Nigh   Help!
+    
+Notes:
+    The path given as an argument must be double-quoted.
+"""
+
+import argparse
+from winpath import get_linuxpath
+
+__author__ = "Bernat Zaragoza Travieso"
+__license__ = "MIT"
+__version__ = "0.1"
+
+parser = argparse.ArgumentParser(description=__doc__,
+				  usage='use "%(prog)s --help" for more information',
+				  formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('winpath', metavar='P',
+					help='File/folder path in windows format')
+args = parser.parse_args()
+print(get_linuxpath(args.winpath))
